@@ -1,0 +1,62 @@
+Package: PhysioNIRS
+Title: Governed Near-Infrared Spectroscopy Data and SNIRF Input/Output
+Version: 0.5.1
+Authors@R:
+    person(given = "Yusuke",
+           family = "Matsui",
+           role = c("aut", "cre"),
+           email = "mail.to.matsui@gmail.com")
+Description: Provides strict input, output, measurement identity, probe
+    geometry, optical-density, modified Beer-Lambert, motion-correction, and
+    short-separation nuisance, signal-quality, channel-pruning, and live
+    neurofeedback contracts for continuous-wave functional near-infrared
+    spectroscopy data stored in 'PhysioExperiment' objects.
+    Shared Near Infrared Spectroscopy Format ('SNIRF') files are read and
+    written through structured 'HDF5' APIs while preserving time bases,
+    measurement order, probe coordinates, metadata tags, stimulus tables, and
+    processing provenance.
+Depends:
+    R (>= 4.2),
+    PhysioCore
+Imports:
+    digest,
+    methods,
+    PhysioStream (>= 0.9.0),
+    rhdf5,
+    S4Vectors,
+    signal,
+    SummarizedExperiment,
+    stats
+Suggests:
+    testthat (>= 3.2.0),
+    knitr,
+    rmarkdown
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Config/testthat/edition: 3
+Collate:
+    'PhysioNIRS-package.R'
+    'snirf-contract.R'
+    'io-snirf.R'
+    'probe.R'
+    'optical-density.R'
+    'dpf.R'
+    'extinction.R'
+    'mbll.R'
+    'motion-contract.R'
+    'motion-detect.R'
+    'motion-tddr.R'
+    'motion-wavelet.R'
+    'motion-spline.R'
+    'short-separation-contract.R'
+    'short-separation.R'
+    'physiology-band.R'
+    'nuisance-design.R'
+    'quality-contract.R'
+    'quality.R'
+    'neurofeedback.R'
+    'zzz.R'
+URL: https://github.com/x-biosignal/PhysioNIRS, https://x-biosignal.r-universe.dev/PhysioNIRS, https://x-biosignal.github.io/PhysioNIRS/
+BugReports: https://github.com/x-biosignal/PhysioNIRS/issues
+Config/roxygen2/version: 8.0.0

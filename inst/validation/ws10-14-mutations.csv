@@ -1,0 +1,33 @@
+"id","mutation","expected_gate","observed_failure","outcome","gate_satisfied"
+"M01","threshold uses greater-or-equal","detector/reference",TRUE,"detected",TRUE
+"M02","diff alignment shifted","detector/reference",TRUE,"detected",TRUE
+"M03","circular lag comparison","detector/reference",TRUE,"detected",TRUE
+"M04","mask expansion is not clipped","detector/reference",TRUE,"detected",TRUE
+"M05","wavelength grouping omitted","detector/reference",TRUE,"detected",TRUE
+"M06","grouping uses display names","detector/reference",TRUE,"detected",TRUE
+"M07","population SD substituted","detector/reference",TRUE,"detected",TRUE
+"M08","TDDR mean centering omitted","tddr/reference",TRUE,"detected",TRUE
+"M09","TDDR mean restoration omitted","tddr/reference",TRUE,"detected",TRUE
+"M10","base signal used as low component","tddr/reference",TRUE,"detected",TRUE
+"M11","causal filtering substituted","tddr/reference",TRUE,"detected",TRUE
+"M12","wrong Butterworth order","tddr/reference",TRUE,"detected",TRUE
+"M13","wrong cutoff normalization","tddr/reference",TRUE,"detected",TRUE
+"M14","wrong MAD constant","tddr/reference",TRUE,"detected",TRUE
+"M15","OLS derivative mean substituted","tddr/reference",TRUE,"detected",TRUE
+"M16","wrong Tukey tune","tddr/reference",TRUE,"detected",TRUE
+"M17","wrong Tukey inequality","tddr/reference",FALSE,"equivalent_by_algebra",TRUE
+"M18","weight square omitted","tddr/reference",TRUE,"detected",TRUE
+"M19","cumsum origin shifted","tddr/reference",TRUE,"detected",TRUE
+"M20","decimated DWT substituted","wavelet/reference",TRUE,"detected",TRUE
+"M21","wrong db2 coefficient phase","wavelet/reference",TRUE,"detected",TRUE
+"M22","wrong wavelet boundary","wavelet/reference",TRUE,"detected",TRUE
+"M23","SD wavelet threshold substituted","wavelet/reference",TRUE,"detected",TRUE
+"M24","outliers retained","wavelet/reference",TRUE,"detected",TRUE
+"M25","padding not trimmed","wavelet/reference",TRUE,"detected",TRUE
+"M26","smooth.spline spar substituted","spline/reference",TRUE,"detected",TRUE
+"M27","spline level reconstruction omitted","spline/reference",TRUE,"detected",TRUE
+"M28","stale mask accepted","mask binding",TRUE,"detected",TRUE
+"M29","existing assay overwritten","output collision",TRUE,"detected",TRUE
+"M30","irregular time resampled","time contract",TRUE,"detected",TRUE
+"M31","metadata or events discarded","metadata/events",TRUE,"detected",TRUE
+"M32","non-finite values propagated","finite output",TRUE,"detected",TRUE

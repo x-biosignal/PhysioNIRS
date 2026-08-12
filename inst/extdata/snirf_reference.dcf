@@ -1,0 +1,13 @@
+Generator: Rscript
+        physio-ecosystem/PhysioNIRS/data-raw/generate-snirf-reference.R
+R: 4.3.3
+rhdf5: 2.46.1
+HDF5: 1.10.7
+SNIRF: 1.0 (v1.1 contract)
+Dimensions: 17 time x 6 measurements
+Wavelengths: 760, 850 nm
+Geometry: 2-D and 3-D, cm
+Stimuli: left (4 columns), right (3 columns)
+License: CC0/public domain synthetic fixture
+Provenance: Deterministic non-identifying analytic values
+SemanticDigest: 26fb4fe2e8de8bb3798da59616656d79

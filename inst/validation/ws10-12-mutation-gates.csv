@@ -1,0 +1,23 @@
+"gate","mutation","detected"
+1,"data matrix transposed",TRUE
+2,"compact time interpreted as two samples",TRUE
+3,"milliseconds treated as seconds",TRUE
+4,"irregular time reported as uniform",TRUE
+5,"measurement list reordered",TRUE
+6,"source and detector indices swapped",TRUE
+7,"wavelength index treated as wavelength value",TRUE
+8,"indexed and vectorized lists combined",TRUE
+9,"missing measurement silently dropped",TRUE
+10,"probe coordinate axis dropped",TRUE
+11,"centimeters reported as meters",TRUE
+12,"2-D geometry mislabeled as 3-D",TRUE
+13,"duplicate channel labels accepted",TRUE
+14,"stimulus duration/value columns swapped",TRUE
+15,"extra stimulus columns lost",TRUE
+16,"stale stored stimuli written after event edits",TRUE
+17,"unknown metadata tags lost",TRUE
+18,"subject identifier printed",TRUE
+19,"rank-1 singleton accepted as required scalar",TRUE
+20,"overwrite failure leaves a partial file",TRUE
+21,"official expectations inferred from R reader",TRUE
+22,"runtime Python/network dependency introduced",TRUE
