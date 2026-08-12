@@ -1,0 +1,103 @@
+# PhysioNIRS
+
+`PhysioNIRS` provides governed SNIRF input/output, optical-density,
+haemoglobin, motion-correction, and short-separation contracts for
+near-infrared spectroscopy data represented as `PhysioExperiment`
+objects.
+
+``` r
+
+library(PhysioNIRS)
+
+x <- readSNIRF("recording.snirf")
+measurementList(x)
+sourceDetectorDistances(x, unit = "m")
+writeSNIRF(x, "roundtrip.snirf")
+```
+
+For a governed optical-density assay, short-separation processing is
+explicit:
+
+``` r
+
+x_od <- intensityToOD(x, assay_name = "raw")
+short <- identifyShortChannels(x_od, threshold_m = 0.01)
+corrected <- shortSeparationRegress(
+  x_od, assay_name = "OD", short = short
+)
+nuisance <- shortSeparationDesign(
+  x_od,
+  assay_name = "OD",
+  short = short,
+  aggregation = "mean",
+  physiology_bands = c("mayer", "respiration")
+)
+```
+
+Short-channel regression is a signal-processing choice, not evidence
+that a channel contains only extracerebral physiology. Named physiology
+bands are nuisance ranges rather than diagnoses, and
+population-appropriate explicit ranges should be used when the adult
+defaults are unsuitable.
+
+SNIRF metadata can contain subject identifiers and acquisition dates.
+Remove or replace identifying metadata before sharing files.
+
+# Package index
+
+## All functions
+
+- [`PhysioNIRS`](https://x-biosignal.github.io/PhysioNIRS/reference/PhysioNIRS-package.md)
+  [`PhysioNIRS-package`](https://x-biosignal.github.io/PhysioNIRS/reference/PhysioNIRS-package.md)
+  : PhysioNIRS: governed NIRS data and SNIRF input/output
+- [`dpf()`](https://x-biosignal.github.io/PhysioNIRS/reference/dpf.md) :
+  Estimate a differential pathlength factor
+- [`extinctionCoefficients()`](https://x-biosignal.github.io/PhysioNIRS/reference/extinctionCoefficients.md)
+  : Get governed haemoglobin extinction coefficients
+- [`identifyShortChannels()`](https://x-biosignal.github.io/PhysioNIRS/reference/identifyShortChannels.md)
+  : Identify short source-detector channels
+- [`intensityToOD()`](https://x-biosignal.github.io/PhysioNIRS/reference/intensityToOD.md)
+  : Convert continuous-wave fNIRS intensity to optical density
+- [`mbll()`](https://x-biosignal.github.io/PhysioNIRS/reference/mbll.md)
+  : Convert optical density to haemoglobin concentration change
+- [`measurementList()`](https://x-biosignal.github.io/PhysioNIRS/reference/measurementList.md)
+  : Return the governed SNIRF measurement list
+- [`motionArtifactDetect()`](https://x-biosignal.github.io/PhysioNIRS/reference/motionArtifactDetect.md)
+  : Detect fNIRS motion artifacts by channel
+- [`nirsNeurofeedbackStart()`](https://x-biosignal.github.io/PhysioNIRS/reference/nirsNeurofeedback-lifecycle.md)
+  [`nirsNeurofeedbackStep()`](https://x-biosignal.github.io/PhysioNIRS/reference/nirsNeurofeedback-lifecycle.md)
+  [`nirsNeurofeedbackState()`](https://x-biosignal.github.io/PhysioNIRS/reference/nirsNeurofeedback-lifecycle.md)
+  [`nirsNeurofeedbackStop()`](https://x-biosignal.github.io/PhysioNIRS/reference/nirsNeurofeedback-lifecycle.md)
+  [`nirsNeurofeedbackScope()`](https://x-biosignal.github.io/PhysioNIRS/reference/nirsNeurofeedback-lifecycle.md)
+  : Control and inspect live NIRS neurofeedback
+- [`nirsNeurofeedback()`](https://x-biosignal.github.io/PhysioNIRS/reference/nirsNeurofeedback.md)
+  : Construct a governed live fNIRS neurofeedback controller
+- [`physiologyBandpass()`](https://x-biosignal.github.io/PhysioNIRS/reference/physiologyBandpass.md)
+  : Extract an explicit fNIRS physiology frequency band
+- [`print(`*`<NIRSNeurofeedback>`*`)`](https://x-biosignal.github.io/PhysioNIRS/reference/print.NIRSNeurofeedback.md)
+  : Display a governed NIRS neurofeedback runtime
+- [`print(`*`<nirs_quality>`*`)`](https://x-biosignal.github.io/PhysioNIRS/reference/print.nirs_quality.md)
+  : Display a governed NIRS quality result
+- [`pruneChannels()`](https://x-biosignal.github.io/PhysioNIRS/reference/pruneChannels.md)
+  : Mark or drop channels using governed NIRS quality results
+- [`readSNIRF()`](https://x-biosignal.github.io/PhysioNIRS/reference/readSNIRF.md)
+  : Read a Shared Near Infrared Spectroscopy Format file
+- [`scalpCouplingIndex()`](https://x-biosignal.github.io/PhysioNIRS/reference/scalpCouplingIndex.md)
+  : Calculate the governed fNIRS scalp-coupling index
+- [`shortSeparationDesign()`](https://x-biosignal.github.io/PhysioNIRS/reference/shortSeparationDesign.md)
+  : Construct a governed short-separation nuisance design
+- [`shortSeparationRegress()`](https://x-biosignal.github.io/PhysioNIRS/reference/shortSeparationRegress.md)
+  : Regress governed short-separation nuisance signals
+- [`signalQualityIndex()`](https://x-biosignal.github.io/PhysioNIRS/reference/signalQualityIndex.md)
+  : Calculate governed fNIRS signal quality
+- [`sourceDetectorDistances()`](https://x-biosignal.github.io/PhysioNIRS/reference/sourceDetectorDistances.md)
+  : Calculate source-detector distances for each SNIRF measurement
+- [`splineMotionCorrect()`](https://x-biosignal.github.io/PhysioNIRS/reference/splineMotionCorrect.md)
+  : Correct detected fNIRS motion intervals with cubic smoothing splines
+- [`tddr()`](https://x-biosignal.github.io/PhysioNIRS/reference/tddr.md)
+  : Repair fNIRS motion artifacts with TDDR
+- [`waveletMotionCorrect()`](https://x-biosignal.github.io/PhysioNIRS/reference/waveletMotionCorrect.md)
+  : Correct fNIRS motion with a shift-invariant db2 wavelet transform
+- [`writeSNIRF()`](https://x-biosignal.github.io/PhysioNIRS/reference/writeSNIRF.md)
+  : Write a Shared Near Infrared Spectroscopy Format file
+
