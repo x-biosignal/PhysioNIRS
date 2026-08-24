@@ -1,7 +1,7 @@
 # PhysioNIRS: governed NIRS data and SNIRF input/output
 
 `PhysioNIRS` maps continuous-wave SNIRF data into the
-[`PhysioCore::PhysioExperiment()`](https://x-biosignal.r-universe.dev/PhysioCore/reference/PhysioExperiment.html)
+[`PhysioCore::PhysioExperiment()`](https://x-biosignal.github.io/PhysioCore//reference/PhysioExperiment.html)
 contract without changing measurement order, probe geometry, stimulus
 tables, or the exact time base. Governed optical-density, modified
 Beer-Lambert, motion-correction, short-separation nuisance,
@@ -34,7 +34,3 @@ Useful links:
 ## Author
 
 **Maintainer**: Yusuke Matsui <mail.to.matsui@gmail.com>
-
-Authors:
-
-- Yusuke Matsui <mail.to.matsui@gmail.com>

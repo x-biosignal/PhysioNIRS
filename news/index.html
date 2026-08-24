@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">PhysioNIRS</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,6 +50,14 @@
       <small>Source: <a href="https://github.com/x-biosignal/PhysioNIRS/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.6.0" id="physionirs-060">PhysioNIRS 0.6.0<a class="anchor" aria-label="anchor" href="#physionirs-060"></a></h2>
+<p>First-level cortical-activation GLM.</p>
+<ul><li>
+<code><a href="../reference/nirsActivationGLM.html">nirsActivationGLM()</a></code>: fits every haemoglobin channel against HRF-convolved task regressors (per-condition boxcars over the stimulus blocks convolved with a canonical double-gamma HRF), a discrete-cosine drift basis, and optional short-separation nuisance regressors, returning per-channel/per-condition activation beta, SE and t. Supports a temporal-derivative basis and per-channel AR(1) prewhitening (fNIRS residuals are strongly autocorrelated, so naive OLS t-statistics are inflated).</li>
+<li>
+<code><a href="../reference/nirsActivationContrast.html">nirsActivationContrast()</a></code>: linear contrasts over the condition betas (estimate, SE, t, p per channel).</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.1" id="physionirs-051">PhysioNIRS 0.5.1<a class="anchor" aria-label="anchor" href="#physionirs-051"></a></h2>
 <ul><li>Fixed <code><a href="../reference/pruneChannels.html">pruneChannels()</a></code> / quality-contract validation on R &gt;= 4.4.0: R 4.4 changed <code>is.atomic(NULL)</code> from TRUE to FALSE, so <code>.nirs_quality_plain()</code> wrongly rejected governed quality results carrying NULL optional-parameter sentinels (e.g. <code>step_seconds = NULL</code>) as ‘stale or malformed’. NULL is now handled explicitly as a plain leaf (its pre-4.4 behaviour).</li>

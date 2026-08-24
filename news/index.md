@@ -1,5 +1,22 @@
 # Changelog
 
+## PhysioNIRS 0.6.0
+
+First-level cortical-activation GLM.
+
+- [`nirsActivationGLM()`](https://x-biosignal.github.io/PhysioNIRS/reference/nirsActivationGLM.md):
+  fits every haemoglobin channel against HRF-convolved task regressors
+  (per-condition boxcars over the stimulus blocks convolved with a
+  canonical double-gamma HRF), a discrete-cosine drift basis, and
+  optional short-separation nuisance regressors, returning
+  per-channel/per-condition activation beta, SE and t. Supports a
+  temporal-derivative basis and per-channel AR(1) prewhitening (fNIRS
+  residuals are strongly autocorrelated, so naive OLS t-statistics are
+  inflated).
+- [`nirsActivationContrast()`](https://x-biosignal.github.io/PhysioNIRS/reference/nirsActivationContrast.md):
+  linear contrasts over the condition betas (estimate, SE, t, p per
+  channel).
+
 ## PhysioNIRS 0.5.1
 
 - Fixed

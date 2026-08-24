@@ -64,6 +64,10 @@ Remove or replace identifying metadata before sharing files.
   : Return the governed SNIRF measurement list
 - [`motionArtifactDetect()`](https://x-biosignal.github.io/PhysioNIRS/reference/motionArtifactDetect.md)
   : Detect fNIRS motion artifacts by channel
+- [`nirsActivationContrast()`](https://x-biosignal.github.io/PhysioNIRS/reference/nirsActivationContrast.md)
+  : Contrast of an fNIRS activation GLM
+- [`nirsActivationGLM()`](https://x-biosignal.github.io/PhysioNIRS/reference/nirsActivationGLM.md)
+  : First-level fNIRS cortical-activation GLM
 - [`nirsNeurofeedbackStart()`](https://x-biosignal.github.io/PhysioNIRS/reference/nirsNeurofeedback-lifecycle.md)
   [`nirsNeurofeedbackStep()`](https://x-biosignal.github.io/PhysioNIRS/reference/nirsNeurofeedback-lifecycle.md)
   [`nirsNeurofeedbackState()`](https://x-biosignal.github.io/PhysioNIRS/reference/nirsNeurofeedback-lifecycle.md)
