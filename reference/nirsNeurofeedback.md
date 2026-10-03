@@ -64,3 +64,34 @@ names and units must be the exact HbO identities and `"uM"`.
 ## References
 
 Kober et al. (2017), DOI: 10.3389/fnhum.2017.00081.
+
+## Examples
+
+``` r
+# \donttest{
+# Offline demonstration on a deterministic loopback stream. In practice
+# `stream` is a live regular-rate HbO inlet (e.g. an LSL inlet from a device).
+info <- PhysioStream::streamInfo(
+  "nirs-demo", type = "NIRS", channel_names = c("S1_D1", "S2_D2"),
+  nominal_srate = 10, dtype = "float64", source_id = "nirs-demo",
+  clock_domain = "demo-clock", channel_units = c("uM", "uM"),
+  metadata = list(nirs = list(
+    assay_name = "HbO", assay_kind = "haemoglobin_concentration",
+    identity_kind = "pair", channel_id = c("S1_D1", "S2_D2"),
+    source_index = 1:2, detector_index = 1:2)))
+stream <- PhysioStream::streamOpen(PhysioStream::loopbackSource(info, 8192L))
+controller <- nirsNeurofeedback(
+  stream, regions = list(motor = "S1_D1", control = "S2_D2"),
+  contrast = c(motor = 1, control = -1),
+  baseline_seconds = 1, update_seconds = 0.1, smoothing_seconds = 0.5)
+nirsNeurofeedbackStart(controller)
+time <- (0:19) / 10
+PhysioStream::loopbackFeed(stream, cbind(
+  S1_D1 = 1 + 0.2 * sin(2 * pi * 0.5 * time),
+  S2_D2 = 1 + 0.1 * cos(time)), time)
+while (nirsNeurofeedbackStep(controller, 4L)$updated) {}
+nirsNeurofeedbackState(controller)$lifecycle
+#> [1] "running"
+nirsNeurofeedbackStop(controller)
+# }
+```

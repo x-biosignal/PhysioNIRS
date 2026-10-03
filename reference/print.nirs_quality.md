@@ -18,3 +18,11 @@ print(x, ...)
 - ...:
 
   Unused.
+
+## Examples
+
+``` r
+od <- intensityToOD(PhysioNIRS:::.nirs_demo_object())
+print(signalQualityIndex(od))
+#> NIRS quality <phoebe_peak_power>: 4 channels x 1 windows; pass 4/4
+```

@@ -32,3 +32,30 @@ extinctionCoefficients(
 ## Value
 
 A numeric matrix with exact columns `HbO` and `HbR`.
+
+## Examples
+
+``` r
+# Molar extinction (m^-1 M^-1) at two typical fNIRS wavelengths
+extinctionCoefficients(c(760, 850))
+#>           HbO      HbR
+#> [1,] 134931.5 356559.9
+#> [2,] 243613.5 159182.3
+#> attr(,"wavelength_nm")
+#> [1] 760 850
+#> attr(,"unit")
+#> [1] "m-1 M-1"
+#> attr(,"extrapolated")
+#> [1] FALSE FALSE
+# The same coefficients expressed per centimetre
+extinctionCoefficients(c(690, 830), unit = "cm-1 M-1")
+#>      HbO     HbR
+#> [1,] 276 2051.96
+#> [2,] 974  693.04
+#> attr(,"wavelength_nm")
+#> [1] 690 830
+#> attr(,"unit")
+#> [1] "cm-1 M-1"
+#> attr(,"extrapolated")
+#> [1] FALSE FALSE
+```

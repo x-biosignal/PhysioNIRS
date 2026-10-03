@@ -51,3 +51,12 @@ motionArtifactDetect(
 ## Value
 
 A typed `nirs_motion_mask` aligned to assay rows and columns.
+
+## Examples
+
+``` r
+od <- intensityToOD(PhysioNIRS:::.nirs_demo_object())
+mask <- motionArtifactDetect(od)
+class(mask)
+#> [1] "nirs_motion_mask"
+```

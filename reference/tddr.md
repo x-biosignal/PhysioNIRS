@@ -45,3 +45,12 @@ tddr(
 ## Value
 
 A clone of `x` with one motion-corrected assay.
+
+## Examples
+
+``` r
+od <- intensityToOD(PhysioNIRS:::.nirs_demo_object())
+corrected <- tddr(od)
+SummarizedExperiment::assayNames(corrected)
+#> [1] "raw"     "OD"      "OD_tddr"
+```

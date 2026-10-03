@@ -45,3 +45,12 @@ waveletMotionCorrect(
 ## Value
 
 A clone of `x` with one motion-corrected assay.
+
+## Examples
+
+``` r
+od <- intensityToOD(PhysioNIRS:::.nirs_demo_object())
+corrected <- waveletMotionCorrect(od)
+SummarizedExperiment::assayNames(corrected)
+#> [1] "raw"        "OD"         "OD_wavelet"
+```

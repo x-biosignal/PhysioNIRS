@@ -58,3 +58,11 @@ A source-bound `nirs_quality` result.
 ## References
 
 Pollonini et al. (2014), DOI: 10.1117/1.JBO.19.8.086007.
+
+## Examples
+
+``` r
+od <- intensityToOD(PhysioNIRS:::.nirs_demo_object())
+scalpCouplingIndex(od)
+#> NIRS quality <scalp_coupling_index>: 4 channels x 1 windows; pass 4/4
+```

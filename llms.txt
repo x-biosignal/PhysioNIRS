@@ -9,10 +9,18 @@ objects.
 
 library(PhysioNIRS)
 
-x <- readSNIRF("recording.snirf")
+# A continuous-wave SNIRF file bundled with the package (no download needed).
+snirf <- system.file(
+  "extdata", "snirf_official_simple_probe.snirf", package = "PhysioNIRS"
+)
+x <- readSNIRF(snirf)
 measurementList(x)
 sourceDetectorDistances(x, unit = "m")
-writeSNIRF(x, "roundtrip.snirf")
+
+x_od <- intensityToOD(x, assay_name = "raw")   # raw intensity -> optical density
+x_hb <- mbll(x_od, assay_name = "OD")          # optical density -> haemoglobin
+
+writeSNIRF(x, file.path(tempdir(), "roundtrip.snirf"))
 ```
 
 For a governed optical-density assay, short-separation processing is
@@ -20,18 +28,23 @@ explicit:
 
 ``` r
 
-x_od <- intensityToOD(x, assay_name = "raw")
 short <- identifyShortChannels(x_od, threshold_m = 0.01)
-corrected <- shortSeparationRegress(
-  x_od, assay_name = "OD", short = short
-)
-nuisance <- shortSeparationDesign(
-  x_od,
-  assay_name = "OD",
-  short = short,
-  aggregation = "mean",
-  physiology_bands = c("mayer", "respiration")
-)
+
+# When the probe includes short channels, regress them out and build a
+# physiology nuisance design. (This symmetric example probe has only
+# standard-separation channels, so the step below is skipped here.)
+if (any(short$is_short) && !all(short$is_short)) {
+  corrected <- shortSeparationRegress(
+    x_od, assay_name = "OD", short = short
+  )
+  nuisance <- shortSeparationDesign(
+    x_od,
+    assay_name = "OD",
+    short = short,
+    aggregation = "mean",
+    physiology_bands = c("mayer", "respiration")
+  )
+}
 ```
 
 Short-channel regression is a signal-processing choice, not evidence
@@ -42,6 +55,29 @@ defaults are unsuitable.
 
 SNIRF metadata can contain subject identifiers and acquisition dates.
 Remove or replace identifying metadata before sharing files.
+
+## Installation
+
+The ecosystem builds on Bioconductor, so its repositories have to be on
+the list as well – without them the install stops at
+`SummarizedExperiment`.
+
+``` r
+
+install.packages("BiocManager", repos = "https://cloud.r-project.org")
+install.packages(
+  "PhysioNIRS",
+  repos = c("https://x-biosignal.r-universe.dev", BiocManager::repositories())
+)
+```
+
+From GitHub instead:
+
+``` r
+
+install.packages("remotes", repos = "https://cloud.r-project.org")
+remotes::install_github("x-biosignal/PhysioNIRS")
+```
 
 # Package index
 
@@ -105,3 +141,9 @@ Remove or replace identifying metadata before sharing files.
 - [`writeSNIRF()`](https://x-biosignal.github.io/PhysioNIRS/reference/writeSNIRF.md)
   : Write a Shared Near Infrared Spectroscopy Format file
 
+# Articles
+
+### All vignettes
+
+- [A continuous-wave fNIRS pipeline with synthetic
+  data](https://x-biosignal.github.io/PhysioNIRS/articles/nirs-pipeline.md):

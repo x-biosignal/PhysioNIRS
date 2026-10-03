@@ -17,7 +17,7 @@ each condition. Run it separately on the HbO and HbR assays."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">PhysioNIRS</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,6 +26,10 @@ each condition. Run it separately on the HbO and HbR assays."></head><body>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/nirs-pipeline.html">A continuous-wave fNIRS pipeline with synthetic data</a></li>
+  </ul></li>
       </ul><ul class="navbar-nav"><li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-ecosystem" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Ecosystem</button>
   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-ecosystem"><li><a class="external-link dropdown-item" href="https://x-biosignal.github.io/PhysioCore/">PhysioCore</a></li>
@@ -96,7 +100,7 @@ assay from <code><a href="mbll.html">mbll()</a></code>).</p></dd>
 
 <dt id="arg-events">events<a class="anchor" aria-label="anchor" href="#arg-events"></a></dt>
 <dd><p>A <code>data.frame</code> with numeric <code>onset</code> and <code>duration</code> (seconds) and
-a <code>condition</code> column; if <code>NULL</code>, the object's events (<a href="https://x-biosignal.github.io/PhysioCore//reference/getEvents.html" class="external-link">PhysioCore::getEvents</a>
+a <code>condition</code> column; if <code>NULL</code>, the object's events (<a href="https://x-biosignal.r-universe.dev/PhysioExperiment/reference/getEvents.html" class="external-link">PhysioExperiment::getEvents</a>
 <code>onset</code>/<code>duration</code>/<code>value</code>) are used, with <code>value</code> as the condition.</p></dd>
 
 
@@ -149,6 +153,16 @@ matrices, per-channel <code>sigma2</code>/<code>rho</code>, and the <code>design
     <div class="dont-index"><p><code><a href="nirsActivationContrast.html">nirsActivationContrast()</a></code>, <code><a href="shortSeparationDesign.html">shortSeparationDesign()</a></code>, <code><a href="mbll.html">mbll()</a></code></p></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">hb</span> <span class="op">&lt;-</span> <span class="fu"><a href="mbll.html">mbll</a></span><span class="op">(</span><span class="fu"><a href="intensityToOD.html">intensityToOD</a></span><span class="op">(</span><span class="fu">PhysioNIRS</span><span class="fu">:::</span><span class="fu">.nirs_demo_object</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu">nirsActivationGLM</span><span class="op">(</span><span class="va">hb</span>, assay_name <span class="op">=</span> <span class="st">"HbO"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">fit</span><span class="op">$</span><span class="va">coefficients</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   channel condition       beta        se         t  df         p</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   S1_D1      task 0.03532496 0.1592257 0.2218547 152 0.8247248</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   S2_D2      task 0.13246861 0.5970962 0.2218547 152 0.8247248</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

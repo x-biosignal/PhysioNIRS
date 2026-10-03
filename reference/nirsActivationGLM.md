@@ -36,7 +36,7 @@ nirsActivationGLM(
 
   A `data.frame` with numeric `onset` and `duration` (seconds) and a
   `condition` column; if `NULL`, the object's events
-  ([PhysioCore::getEvents](https://x-biosignal.github.io/PhysioCore//reference/getEvents.html)
+  ([PhysioExperiment::getEvents](https://x-biosignal.r-universe.dev/PhysioExperiment/reference/getEvents.html)
   `onset`/`duration`/`value`) are used, with `value` as the condition.
 
 - assay_name:
@@ -88,3 +88,14 @@ Friston KJ et al. (1994) Statistical parametric maps. *Hum Brain Mapp*
 [`nirsActivationContrast()`](https://x-biosignal.github.io/PhysioNIRS/reference/nirsActivationContrast.md),
 [`shortSeparationDesign()`](https://x-biosignal.github.io/PhysioNIRS/reference/shortSeparationDesign.md),
 [`mbll()`](https://x-biosignal.github.io/PhysioNIRS/reference/mbll.md)
+
+## Examples
+
+``` r
+hb <- mbll(intensityToOD(PhysioNIRS:::.nirs_demo_object()))
+fit <- nirsActivationGLM(hb, assay_name = "HbO")
+fit$coefficients
+#>   channel condition       beta        se         t  df         p
+#> 1   S1_D1      task 0.03532496 0.1592257 0.2218547 152 0.8247248
+#> 2   S2_D2      task 0.13246861 0.5970962 0.2218547 152 0.8247248
+```

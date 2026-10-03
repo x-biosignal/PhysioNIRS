@@ -55,3 +55,13 @@ Butterworth band-pass through
 [`signal::filtfilt()`](https://rdrr.io/pkg/signal/man/filtfilt.html).
 Explicit ranges must remain strictly below the governed Nyquist
 frequency.
+
+## Examples
+
+``` r
+od <- intensityToOD(PhysioNIRS:::.nirs_demo_object())
+# Pass an explicit band; defaults warn that adult ranges may not transfer
+filt <- physiologyBandpass(od, band = "cardiac", range_hz = c(0.8, 2))
+SummarizedExperiment::assayNames(filt)
+#> [1] "raw"        "OD"         "OD_cardiac"
+```

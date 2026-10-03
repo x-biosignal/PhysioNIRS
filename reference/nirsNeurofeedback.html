@@ -15,7 +15,7 @@ side-effect-free."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">PhysioNIRS</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,6 +24,10 @@ side-effect-free."></head><body>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/nirs-pipeline.html">A continuous-wave fNIRS pipeline with synthetic data</a></li>
+  </ul></li>
       </ul><ul class="navbar-nav"><li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-ecosystem" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Ecosystem</button>
   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-ecosystem"><li><a class="external-link dropdown-item" href="https://x-biosignal.github.io/PhysioCore/">PhysioCore</a></li>
@@ -128,6 +132,36 @@ and units must be the exact HbO identities and <code>"uM"</code>.</p>
     <p>Kober et al. (2017), DOI: 10.3389/fnhum.2017.00081.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co"># Offline demonstration on a deterministic loopback stream. In practice</span></span></span>
+<span class="r-in"><span><span class="co"># `stream` is a live regular-rate HbO inlet (e.g. an LSL inlet from a device).</span></span></span>
+<span class="r-in"><span><span class="va">info</span> <span class="op">&lt;-</span> <span class="fu">PhysioStream</span><span class="fu">::</span><span class="fu"><a href="https://x-biosignal.github.io/PhysioStream//reference/streamInfo.html" class="external-link">streamInfo</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"nirs-demo"</span>, type <span class="op">=</span> <span class="st">"NIRS"</span>, channel_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"S1_D1"</span>, <span class="st">"S2_D2"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  nominal_srate <span class="op">=</span> <span class="fl">10</span>, dtype <span class="op">=</span> <span class="st">"float64"</span>, source_id <span class="op">=</span> <span class="st">"nirs-demo"</span>,</span></span>
+<span class="r-in"><span>  clock_domain <span class="op">=</span> <span class="st">"demo-clock"</span>, channel_units <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"uM"</span>, <span class="st">"uM"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  metadata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>nirs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    assay_name <span class="op">=</span> <span class="st">"HbO"</span>, assay_kind <span class="op">=</span> <span class="st">"haemoglobin_concentration"</span>,</span></span>
+<span class="r-in"><span>    identity_kind <span class="op">=</span> <span class="st">"pair"</span>, channel_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"S1_D1"</span>, <span class="st">"S2_D2"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    source_index <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, detector_index <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">stream</span> <span class="op">&lt;-</span> <span class="fu">PhysioStream</span><span class="fu">::</span><span class="fu"><a href="https://x-biosignal.github.io/PhysioStream//reference/stream-operations.html" class="external-link">streamOpen</a></span><span class="op">(</span><span class="fu">PhysioStream</span><span class="fu">::</span><span class="fu"><a href="https://x-biosignal.github.io/PhysioStream//reference/loopbackSource.html" class="external-link">loopbackSource</a></span><span class="op">(</span><span class="va">info</span>, <span class="fl">8192L</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">controller</span> <span class="op">&lt;-</span> <span class="fu">nirsNeurofeedback</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">stream</span>, regions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>motor <span class="op">=</span> <span class="st">"S1_D1"</span>, control <span class="op">=</span> <span class="st">"S2_D2"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  contrast <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>motor <span class="op">=</span> <span class="fl">1</span>, control <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  baseline_seconds <span class="op">=</span> <span class="fl">1</span>, update_seconds <span class="op">=</span> <span class="fl">0.1</span>, smoothing_seconds <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="nirsNeurofeedback-lifecycle.html">nirsNeurofeedbackStart</a></span><span class="op">(</span><span class="va">controller</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">time</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">19</span><span class="op">)</span> <span class="op">/</span> <span class="fl">10</span></span></span>
+<span class="r-in"><span><span class="fu">PhysioStream</span><span class="fu">::</span><span class="fu"><a href="https://x-biosignal.github.io/PhysioStream//reference/loopbackFeed.html" class="external-link">loopbackFeed</a></span><span class="op">(</span><span class="va">stream</span>, <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  S1_D1 <span class="op">=</span> <span class="fl">1</span> <span class="op">+</span> <span class="fl">0.2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">pi</span> <span class="op">*</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="va">time</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  S2_D2 <span class="op">=</span> <span class="fl">1</span> <span class="op">+</span> <span class="fl">0.1</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">cos</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span><span class="op">)</span>, <span class="va">time</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">while</span> <span class="op">(</span><span class="fu"><a href="nirsNeurofeedback-lifecycle.html">nirsNeurofeedbackStep</a></span><span class="op">(</span><span class="va">controller</span>, <span class="fl">4L</span><span class="op">)</span><span class="op">$</span><span class="va">updated</span><span class="op">)</span> <span class="op">{</span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="nirsNeurofeedback-lifecycle.html">nirsNeurofeedbackState</a></span><span class="op">(</span><span class="va">controller</span><span class="op">)</span><span class="op">$</span><span class="va">lifecycle</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "running"</span>
+<span class="r-in"><span><span class="fu"><a href="nirsNeurofeedback-lifecycle.html">nirsNeurofeedbackStop</a></span><span class="op">(</span><span class="va">controller</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

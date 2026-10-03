@@ -64,3 +64,13 @@ designs. Short columns and lag-edge rows remain unchanged.
 ## References
 
 Saager and Berger (2005), DOI: 10.1364/JOSAA.22.001874.
+
+## Examples
+
+``` r
+od <- intensityToOD(PhysioNIRS:::.nirs_demo_object())
+short <- identifyShortChannels(od, threshold_m = 0.015)
+corrected <- shortSeparationRegress(od, short = short)
+SummarizedExperiment::assayNames(corrected)
+#> [1] "raw"    "OD"     "OD_ssr"
+```

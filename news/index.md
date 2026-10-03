@@ -1,5 +1,19 @@
 # Changelog
 
+## PhysioNIRS 0.6.1
+
+### Documentation
+
+- A vignette carries one task end to end on synthetic or bundled data,
+  offline, and is built and run by `R CMD check`.
+- Runnable `@examples` added or corrected across 26 help pages. Each
+  runs offline in seconds, writes nothing outside
+  [`tempdir()`](https://rdrr.io/r/base/tempfile.html), and is executed
+  by `R CMD check`; anything needing a device, a download or an optional
+  backend is fenced with the reason stated.
+- The README’s quick start runs as written: it attaches the package,
+  builds its own inputs, and uses only hard dependencies.
+
 ## PhysioNIRS 0.6.0
 
 First-level cortical-activation GLM.

@@ -36,3 +36,15 @@ dpf(
 ## Value
 
 A positive numeric vector with model and extrapolation attributes.
+
+## Examples
+
+``` r
+# Age-dependent differential pathlength factors for a 30-year-old adult
+dpf(c(760, 850), age_years = 30)
+#> [1] 6.296601 5.234328
+#> attr(,"model")
+#> [1] "scholkmann2013"
+#> attr(,"extrapolated")
+#> [1] FALSE FALSE
+```

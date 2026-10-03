@@ -30,3 +30,14 @@ A per-channel `data.frame`: `channel`, `estimate`, `se`, `t`, `df`, `p`.
 ## See also
 
 [`nirsActivationGLM()`](https://x-biosignal.github.io/PhysioNIRS/reference/nirsActivationGLM.md)
+
+## Examples
+
+``` r
+hb <- mbll(intensityToOD(PhysioNIRS:::.nirs_demo_object()))
+fit <- nirsActivationGLM(hb, assay_name = "HbO")
+nirsActivationContrast(fit, c(task = 1))
+#>   channel   estimate        se         t  df         p
+#> 1   S1_D1 0.03532496 0.1592257 0.2218547 152 0.8247248
+#> 2   S2_D2 0.13246861 0.5970962 0.2218547 152 0.8247248
+```

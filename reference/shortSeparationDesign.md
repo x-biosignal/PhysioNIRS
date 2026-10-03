@@ -53,3 +53,13 @@ shortSeparationDesign(
 ## Value
 
 A time-aligned `nirs_nuisance_design` numeric matrix.
+
+## Examples
+
+``` r
+od <- intensityToOD(PhysioNIRS:::.nirs_demo_object())
+short <- identifyShortChannels(od, threshold_m = 0.015)
+design <- shortSeparationDesign(od, short = short)
+dim(design)
+#> [1] 160   2
+```

@@ -57,3 +57,12 @@ intensityToOD(
 ## Value
 
 `x` with a unitless optical-density assay appended.
+
+## Examples
+
+``` r
+pe <- PhysioNIRS:::.nirs_demo_object()
+od <- intensityToOD(pe)
+SummarizedExperiment::assayNames(od)
+#> [1] "raw" "OD" 
+```

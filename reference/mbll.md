@@ -53,3 +53,12 @@ mbll(
 ## Value
 
 A pair-collapsed `PhysioExperiment` with concentration assays.
+
+## Examples
+
+``` r
+od <- intensityToOD(PhysioNIRS:::.nirs_demo_object())
+hb <- mbll(od)
+SummarizedExperiment::assayNames(hb)
+#> [1] "HbO" "HbR" "HbT"
+```

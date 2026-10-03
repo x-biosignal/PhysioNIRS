@@ -67,3 +67,11 @@ A source-bound `nirs_quality` result.
 ## References
 
 Pollonini et al. (2016), DOI: 10.1364/BOE.7.005104.
+
+## Examples
+
+``` r
+od <- intensityToOD(PhysioNIRS:::.nirs_demo_object())
+signalQualityIndex(od)
+#> NIRS quality <phoebe_peak_power>: 4 channels x 1 windows; pass 4/4
+```
