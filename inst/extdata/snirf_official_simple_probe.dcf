@@ -1,0 +1,10 @@
+Upstream: https://github.com/fNIRS/snirf-samples
+Commit: e584d530a0903da250953df8a96affff547f039d
+Path: basic/Simple_Probe.snirf
+SHA256: 4673f295c2acba2f85beb80fcf9a1e5498a92c02b4c7d10b110c0331d30149db
+License: Public domain; upstream LICENSE.md permits use for any purpose.
+Dimensions: 1200 time x 8 measurements
+Wavelengths: 690, 830 nm
+Geometry: 2-D
+StimulusRows: 2, 1, 1
+Validation: Expectations pinned independently from upstream HDF5 and Python inspection.
